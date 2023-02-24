@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { FC } from 'react'
-import { Book } from '../../pages/products'
+import { Book } from '../../types/Book'
 
 interface Props {
     data: Book
