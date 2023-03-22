@@ -11,7 +11,7 @@ export default function handlerID(req: NextApiRequest, res:NextApiResponse) {
         data.splice(index, 1)
         res.status(200).json(filtered[0])
     }
-    if (method === "GET") {
+    else if (method === "GET") {
         res.status(200).json(filtered[0])
     } 
     else {
