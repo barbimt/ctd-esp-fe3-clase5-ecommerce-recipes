@@ -1,7 +1,7 @@
 import React from "react";
 import { useWatch } from "react-hook-form";
 
-const Button = () => {
+const SubmitButton = () => {
   // Observamos todos los inputs mediante useWatch.
   const inputs = useWatch();
   // Seguimos la cantidad de renders de este componente
@@ -15,4 +15,4 @@ const Button = () => {
   );
 };
 
-export default Button;
+export default SubmitButton;

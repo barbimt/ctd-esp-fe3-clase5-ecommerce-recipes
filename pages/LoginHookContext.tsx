@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import Button from "../features/components/Button";
+import SubmitButton from "../features/components/SubmitButton";
+import ResetButton from "../features/components/ResetButton";
+
 import InputField from "../features/components/InputField";
 import InputIngredientes from "../features/components/InputIngredientes";
 
@@ -42,8 +44,10 @@ los métodos obtenidos desde useForm*/}
             <InputField name="nombre" type="text" />
             <InputIngredientes />
             <InputField name="pasos" type="textarea" />
-            {/* Utilizamos el componente Button */}
-            <Button />
+         {/* Renombramos el botón de submit y agregamos
+un nuevo botón de reset */}
+<SubmitButton />
+<ResetButton />
           </form>
         </FormProvider>
       </div>
