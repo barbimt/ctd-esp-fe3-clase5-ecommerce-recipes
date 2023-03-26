@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import Button from "../features/components/Button";
 import InputField from "../features/components/InputField";
@@ -15,6 +15,13 @@ const LoginHookContext = () => {
       pasos: "",
     },
   });
+  // Al montarse el componente,
+  // utilizamos el método setFocus
+  // para hacer foco en el primer input
+  useEffect(() => {
+    methods.setFocus("nombre");
+  }, []);
+
   // Eliminamos el uso de watch.
   // Mantenemos el console.count para verificar
   // los renderizados
