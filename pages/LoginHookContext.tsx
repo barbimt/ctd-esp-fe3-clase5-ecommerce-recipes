@@ -1,5 +1,6 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import Button from "../features/components/Button";
 import InputField from "../features/components/InputField";
 import InputIngredientes from "../features/components/InputIngredientes";
 
@@ -14,36 +15,15 @@ const LoginHookContext = () => {
       pasos: "",
     },
   });
-  // Accedemos al método "watch", y le indicamos que deseamos
- // Pasando un array como argumento, podemos observar varios elementos
-const inputs = methods.watch(["nombre", "pasos", "ingredientes"]);
-
-/* Observamos todos los inputs, sin tener que guardarlos en un array como el dearriba ->
-const inputs = methods.watch();
-A diferencia del caso anterior, ahora el método nos retornará un objeto con el nombre de cada
-input como key junto a su valor
-console.log(inputs); // {nombre: "", ingredientes: "", pasos: ""}
-Tendremos que realizar una pequeña modificación en nuestra validación para adaptarlo a la
-nueva estructura de los datos:
-/ Obtenemos un array de las keys (nombres de los inputs), e iteramos sobre el mismo para realizar la validación
-const disabled = Object.keys(inputs).some((key) => inputs[key].length < 10);
-*/
-
-
-  // Como queremos que la persona escriba al menos 10
-  // caracteres, tomamos el valor que nos devuelve
-  // watch y verificamos que su extensión cumpla
-  // dicha condición
-  // Basta con que uno de los inputs tenga una extensión
-// menor de la deseada para inhabilitar el botón
-const disabled = inputs.some((input) => input.length < 10);
-
-
+  // Eliminamos el uso de watch.
+  // Mantenemos el console.count para verificar
+  // los renderizados
+  console.count("renderizado del componente padre");
   // . . .
   const onSubmit = (data: any) => {
     console.log(data);
-    
-  }
+  };
+
   return (
     <main>
       <h2>Nueva Receta: Using Hook Context </h2>
@@ -55,11 +35,8 @@ los métodos obtenidos desde useForm*/}
             <InputField name="nombre" type="text" />
             <InputIngredientes />
             <InputField name="pasos" type="textarea" />
-            {/* Mediante la propiedad "disabled", habilitamos e
-inhabilitamos nuestro botón */}
-            <button type="submit" disabled={disabled}>
-              Enviar
-            </button>
+            {/* Utilizamos el componente Button */}
+            <Button />
           </form>
         </FormProvider>
       </div>
