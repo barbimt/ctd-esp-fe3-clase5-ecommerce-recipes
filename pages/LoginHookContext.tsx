@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../features/components/InputField";
 import InputIngredientes from "../features/components/InputIngredientes";
 
@@ -21,17 +21,20 @@ const LoginHookContext = () => {
     <main>
       <h2>Nueva Receta: Using Hook Context </h2>
       <div className="mainBody">
-        {/* Agregamos el método onSubmit */}
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
-          {/* Por cada vez que usamos el componente InputField,
-pasamos los métodos como props */}
-          <InputField name="nombre" type="text" {...methods} />
-          <InputIngredientes {...methods} />
-          <InputField name="pasos" type="textarea" {...methods} />
-          <button color="primary" type="submit">
-            Enviar
-          </button>
-        </form>
+        {/* Agregamos el provider, y le pasamos
+los métodos obtenidos desde useForm*/}
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onSubmit)}>
+            {/* ¡Aquí ya no es necesario pasar los métodos a
+cada input! */}
+            <InputField name="nombre" type="text" />
+            <InputIngredientes />
+            <InputField name="pasos" type="textarea" />
+            <button color="primary" type="submit">
+              Enviar
+            </button>
+          </form>
+        </FormProvider>
       </div>
     </main>
   );

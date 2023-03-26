@@ -1,4 +1,5 @@
 import React from "react";
+import { useFormContext } from "react-hook-form";
 
 // export type InputFieldProps = {
 //     hideLabel?: Boolean,
@@ -7,11 +8,11 @@ import React from "react";
 //     register:
 // }
 const InputField = (props: any) => {
-  // Obtenemos las variables que necesitamos de las
-  // props. En particular, obtenemos el método “register”
-  // que proviene de useForm, el cual utilizaremos
-  // para registrar el input con dicho Hook.
-  const { name, hideLabel, type, register } = props;
+  // En este caso, dejamos de recibir "register" como
+// una prop, pasando a obtenerla directamente
+// del contexto.
+const { name, hideLabel, type } = props;
+const { register } = useFormContext()
 
   return (
     <div className="inputContainer">
