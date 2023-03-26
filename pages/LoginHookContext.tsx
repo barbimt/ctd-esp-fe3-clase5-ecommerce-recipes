@@ -31,8 +31,23 @@ const LoginHookContext = () => {
   // . . .
   const onSubmit = (data: any) => {
     console.log(data);
+    // Luego de ejcutar nuestra lógica,
+    // reseteamos el form
+    methods.reset();
   };
 
+  // Obtenemos este valor del estado del formulario
+  const isSubmitSuccessful = methods.formState.isSubmitSuccessful;
+  const reset = methods.reset;
+
+  // Mediante useEffect, validamos cuando
+  // el formulario se haya enviado correctamente
+  // y lo reiniciamos
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
   return (
     <main>
       <h2>Nueva Receta: Using Hook Context </h2>
@@ -44,10 +59,10 @@ los métodos obtenidos desde useForm*/}
             <InputField name="nombre" type="text" />
             <InputIngredientes />
             <InputField name="pasos" type="textarea" />
-         {/* Renombramos el botón de submit y agregamos
+            {/* Renombramos el botón de submit y agregamos
 un nuevo botón de reset */}
-<SubmitButton />
-<ResetButton />
+            <SubmitButton />
+            <ResetButton />
           </form>
         </FormProvider>
       </div>

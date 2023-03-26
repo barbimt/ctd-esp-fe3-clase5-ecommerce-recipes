@@ -5,15 +5,15 @@ import Image from "next/image";
 import { useFormContext } from "react-hook-form";
 
 const InputIngredientes = () => {
- // Utilizando useFormContext accedemos al método
-// resetField
-const { resetField } = useFormContext();
+  // Utilizando useFormContext accedemos al método
+  // resetField
+  const { resetField } = useFormContext();
 
-const onReset = () => {
-// Al invocar al método resetField, le indicamos
-// el campo que deseamos reiniciar.
-resetField("ingredientes");
-};
+  const onReset = () => {
+    // Al invocar al método resetField, le indicamos
+    // el campo que deseamos reiniciar.
+    resetField("ingredientes");
+  };
   return (
     <div>
       <label>Ingredientes:</label>
