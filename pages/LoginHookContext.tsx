@@ -14,9 +14,19 @@ const LoginHookContext = () => {
       pasos: "",
     },
   });
+  // Accedemos al método "watch", y le indicamos que deseamos
+  // observar el input de "pasos" (propiedad name de dicho input)
+  const pasos = methods.watch("pasos", "");
+  // Como queremos que la persona escriba al menos 10
+  // caracteres, tomamos el valor que nos devuelve
+  // watch y verificamos que su extensión cumpla
+  // dicha condición
+  const disabled = pasos.length < 10;
+  // . . .
   const onSubmit = (data: any) => {
     console.log(data);
-  };
+    
+  }
   return (
     <main>
       <h2>Nueva Receta: Using Hook Context </h2>
@@ -25,12 +35,12 @@ const LoginHookContext = () => {
 los métodos obtenidos desde useForm*/}
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
-            {/* ¡Aquí ya no es necesario pasar los métodos a
-cada input! */}
             <InputField name="nombre" type="text" />
             <InputIngredientes />
             <InputField name="pasos" type="textarea" />
-            <button color="primary" type="submit">
+            {/* Mediante la propiedad "disabled", habilitamos e
+inhabilitamos nuestro botón */}
+            <button type="submit" disabled={disabled}>
               Enviar
             </button>
           </form>
