@@ -4,7 +4,7 @@ import SubmitButton from "../features/components/SubmitButton";
 import ResetButton from "../features/components/ResetButton";
 
 import InputField from "../features/components/InputField";
-import InputIngredientes from "../features/components/InputIngredientes";
+import InputIngredientes from "../features/components/InputIngredientes.jsx";
 
 const LoginHookContext = () => {
   // Obtenemos los métodos utilizando el Hook
@@ -29,7 +29,7 @@ const LoginHookContext = () => {
   // los renderizados
   console.count("renderizado del componente padre");
   // . . .
-  const onSubmit = (data: any) => {
+  const onSubmit = (data) => {
     console.log(data);
     // Luego de ejcutar nuestra lógica,
     // reseteamos el form

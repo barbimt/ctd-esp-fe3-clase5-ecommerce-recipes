@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/form2.jsx", "pages/form2.jsx", "pages/form2.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/form2.jsx", "pages/form2.jsx", "pages/form2.jsx", "features/components/InputField.jsx", "features/components/InputField.jsx", "features/components/Wrapper.jsx", "features/components/Wrapper.jsx", "features/components/InputField.test.jsx", "features/components/InputField.test.jsx", "features/components/InputField.test.jsx", "features/components/InputField.test.jsx"],
   "exclude": ["node_modules"]
 }

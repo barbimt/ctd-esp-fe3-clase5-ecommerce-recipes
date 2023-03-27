@@ -7,7 +7,7 @@ import { useFormContext } from "react-hook-form";
 //     type: string,
 //     register:
 // }
-const InputField = (props: any) => {
+const InputField = (props) => {
   // En este caso, dejamos de recibir "register" como
 // una prop, pasando a obtenerla directamente
 // del contexto.
