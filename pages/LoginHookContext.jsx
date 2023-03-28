@@ -13,7 +13,9 @@ const LoginHookContext = () => {
     mode: "all",
     defaultValues: {
       nombre: "",
-      ingredientes: "",
+      // Seteamos el valor por defecto como un array
+      // con un objeto vacío
+      ingredientes: [{}],
       pasos: "",
     },
   });
