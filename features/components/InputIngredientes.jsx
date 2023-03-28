@@ -5,16 +5,22 @@ import Image from "next/image";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
 const InputIngredientes = () => {
-  // Inicializamos el Hook y obtenemos la propiedad "fields", la cual
-  // contendrá un array con nuestros campos
-  const { fields } = useFieldArray({
+  // Obtenemos el método append para poder utilizarlo
+  // más adelante
+  const { fields, append, remove } = useFieldArray({
     name: "ingredientes",
   });
   console.log(fields); // [] => ya que inicialmente no tenemos ningún elemento;
-  // Nos ocuparemos de esto más adelante
-  const agregarIngrediente = () => {};
-  // Nos ocuparemos de esto más adelante
-  const eliminarIngrediente = (id) => {};
+  // Invocamos el método append y le
+  // pasamos un nuevo elemento con un valor vacío
+  const agregarIngrediente = () => {
+    append({ value: "" });
+  };
+  // Invocamos el método remove y le pasamos la posición
+  // del elemento a remover
+  const eliminarIngrediente = (index) => {
+    remove(index);
+  };
 
   return (
     <div className="inputContainer">
@@ -40,7 +46,8 @@ y la propiedad "value" que tiene cada elemento
             <Image
               src={logo}
               alt="tacho-basura"
-              onClick={eliminarIngrediente}
+              // Asignamos el callback y le pasamos el index de cada elemento
+              onClick={()=> eliminarIngrediente(index)}
             />
           </button>
         </div>
