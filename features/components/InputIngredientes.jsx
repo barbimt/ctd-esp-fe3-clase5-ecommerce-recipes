@@ -3,8 +3,18 @@ import InputField from "./InputField";
 import logo from "../../public/logo.png";
 import Image from "next/image";
 import { useFieldArray, useFormContext } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 
 const InputIngredientes = () => {
+  // Utilizando el Hook useFormContext,
+  // accedemos al campo "errors" dentro del
+  // estado del formulario.
+  const {
+    formState: { errors },
+  } = useFormContext();
+
   // Obtenemos el método append para poder utilizarlo
   // más adelante
   const { fields, append, remove } = useFieldArray({
@@ -22,40 +32,68 @@ const InputIngredientes = () => {
     remove(index);
   };
 
+  console.log(errors.ingredientes);
+  /* {
+message: 'Debes ingresar al menos dos ingredientes',
+type: 'min',
+ref: undefined
+}
+*/
+
+  console.log(errors.ingredientes);
+  /* {
+[empty, {…}]
+Si abrimos el objeto que se encuentra en la segunda
+posición, veremos lo siguiente:
+{
+value: {
+message: "Debes ingresar el ingrediente",
+ref: input#ingredientes.1.value,
+type: "required",
+},
+}
+*/
+
   return (
     <div className="inputContainer">
       <label>Ingredientes:</label>
-      {/* Hacemos un map del array que se encuentra almacenado en
-la propiedad "fields" y por cada uno renderizamos el input
-junto con el botón para eliminarlo
-*/}
       {fields.map((field, index) => (
-        // Agregamos la key utilizando el ID de cada field que es
-        // asignado por la librería
-        <div className="ingredientesDiv" key={field.id}>
-          {/* Asignamos dinámicamente el nombre utilizando el mismo
-valor que empleamos como property del Hook, más el índice
-y la propiedad "value" que tiene cada elemento
-*/}
-          <InputField
-            hideLabel
-            type="text"
-            name={`ingredientes.${index}.value`}
-          />
-          <button type="button" className="removeButton">
-            <Image
-              src={logo}
-              alt="tacho-basura"
-              // Asignamos el callback y le pasamos el index de cada elemento
-              onClick={()=> eliminarIngrediente(index)}
+        <>
+          <div className="ingredientesDiv" key={field.id}>
+            <InputField
+              hideLabel
+              type="text"
+              name={`ingredientes.${index}.value`}
             />
-          </button>
-        </div>
+            <button type="button" className="removeButton">
+              <Image
+                src={logo}
+                alt="tacho-basura"
+                onClick={() => eliminarIngrediente(index)}
+              />
+            </button>
+          </div>
+          {/* Para cada ingrediente, validamos si existe un
+mensaje de error y, en su caso, lo renderizamos.
+Para ello, utilizamos el índice de cada elemento.
+*/}
+          {errors?.ingredientes?.[index] && (
+            <small className="errMsg">
+              {errors?.ingredientes[index].value.message}
+            </small>
+          )}
+        </>
       ))}
       <br />
       <button type="button" onClick={agregarIngrediente}>
         Agregar Ingrediente
       </button>
+      <br />
+      {/* Validamos si existe un error general dentro del campo
+"ingredientes" y, en su caso, renderizamos el mensaje */}
+      {errors?.ingredientes?.message && (
+        <small className="errMsg">{errors?.ingredientes.message}</small>
+      )}
     </div>
   );
 };

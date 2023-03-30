@@ -5,17 +5,46 @@ import ResetButton from "../features/components/ResetButton";
 
 import InputField from "../features/components/InputField";
 import InputIngredientes from "../features/components/InputIngredientes.jsx";
+import * as yup from 'yup'
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object().shape({
+  nombre: yup.string().required("Debes ingresar un nombre para la receta"),
+  pasos: yup
+    .string()
+    .min(20, "Los pasos deben contener al menos 20 caracteres"),
+    // Para este campo, indicamos que estamos
+// esperando un array y mediante el método
+// "of" definimos el contenido del mismo.
+ingredientes: yup
+.array()
+.of(
+yup.object().shape({
+// validamos que cada input tenga contenido
+value: yup.string().required("Debes ingresar el ingrediente")
+})
+)
+// Validamos que al menos se ingresen dos ingredientes
+.min(2, "Debes ingresar al menos dos ingredientes")
+});
 
 const LoginHookContext = () => {
-  // Obtenemos los métodos utilizando el Hook
-  // useForm que ya conocemos.
+  // Creamos nuestro esquema de validación para los distintos
+// campos del formulario. Dejaremos el campo "ingredientes"
+// para más adelante.
+
+
+  // Obtenemos los métodos utilizando el Hook useForm que ya conocemos.
+
+  // Dentro del Hook useForm agregamos el yupResolver y le
+  // pasamos el esquema que creamos.
   const methods = useForm({
-    mode: "all",
+    mode: "submit", // Mediante este parámetro, indicamos que
+    // queremos hacer la validación al momento del submit únicamente.
+    resolver: yupResolver(schema),
     defaultValues: {
       nombre: "",
-      // Seteamos el valor por defecto como un array
-      // con un objeto vacío
-      ingredientes: [{}],
+      ingredientes: [{ value: "" }],
       pasos: "",
     },
   });

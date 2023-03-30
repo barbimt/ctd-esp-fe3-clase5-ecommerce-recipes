@@ -1,18 +1,15 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-// export type InputFieldProps = {
-//     hideLabel?: Boolean,
-//     name: string,
-//     type: string,
-//     register:
-// }
 const InputField = (props) => {
-  // En este caso, dejamos de recibir "register" como
-// una prop, pasando a obtenerla directamente
-// del contexto.
-const { name, hideLabel, type } = props;
-const { register } = useFormContext()
+  // Mediante el uso del contexto,
+  // accedemos al campo "errors" que se encuentra
+  // dentro del estado del formulario.
+  const { name, hideLabel, type } = props;
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <div className="inputContainer">
@@ -23,9 +20,24 @@ const { register } = useFormContext()
           </label>
         )}
         {type === "textarea" ? (
-          <textarea id={name} {...register(name)} />
+          <textarea
+            id={name}
+            invalid={!!errors?.[props.name]}
+            {...register(name)}
+          />
         ) : (
-          <input type={type} id={name} {...register(name)} />
+          <input
+            type={type}
+            id={name}
+            invalid={!!errors?.[props.name]}
+            {...register(name)}
+          />
+        )}
+        {/* En caso de que exista un error para el campo,
+se renderiza el mensaje en la pantalla
+*/}
+        {errors?.[props.name]?.message && (
+          <small className="errMsg">{errors?.[props.name].message}</small>
         )}
       </div>
     </div>
